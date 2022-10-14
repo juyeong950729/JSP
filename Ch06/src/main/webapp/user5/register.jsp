@@ -3,13 +3,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user5 등록</title>
+		<title>user::register</title>
 	</head>
 	<body>
-		<h3>user5 등록</h3>
+		<h3>user 등록</h3>
 		
 		<a href="../2_DBCPTest.jsp">처음으로</a>
-		<a href="./list.jsp">user5 목록</a>
+		<a href="./list.jsp">user 목록</a>
 		
 		<form action="./registerProc.jsp" method="post">
 			<table border="1">

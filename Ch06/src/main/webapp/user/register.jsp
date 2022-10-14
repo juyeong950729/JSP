@@ -6,7 +6,7 @@
 		<title>user::register</title>
 	</head>
 	<body>
-		<h3>user 목록</h3>
+		<h3>user 등록</h3>
 		<a href="../1_JDBCTest.jsp">처음으로</a>
 		<a href="./list.jsp">user 목록</a>
 		

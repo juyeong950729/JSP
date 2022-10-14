@@ -44,10 +44,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>member::register</title>
+		<title>member::modify</title>
 	</head>
 	<body>
-		<h3>member 목록</h3>
+		<h3>member 수정</h3>
 		<a href="../1_JDBCTest.jsp">처음으로</a>
 		<a href="./list.jsp">member 목록</a>
 		
@@ -55,7 +55,7 @@
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="uid" readonly placeholder="<%= mb.getUid() %>"/></td>
+					<td><input type="text" name="uid" readonly value="<%= mb.getUid() %>"/></td>
 				</tr>
 				<tr>
 					<td>이름</td>
@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<td>직급</td>
-					<td>
+					<td>s
 						<select name="pos">
 							<option>사원</option>
 							<option>대리</option>

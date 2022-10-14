@@ -50,7 +50,7 @@
 			<table border="1">
 				<tr>
 					<td>학번</td>
-					<td><input type="text" name="StdNo" readonly placeholder="<%= sb.getStdNo() %>"></td>
+					<td><input type="text" name="StdNo" readonly value="<%= sb.getStdNo() %>"></td>
 				</tr>
 				<tr>
 					<td>이름</td>

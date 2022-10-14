@@ -43,10 +43,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user5 목록</title>
+		<title>user::list</title>
 	</head>
 	<body>
-		<h3>user5 목록</h3>
+		<h3>user 목록</h3>
 		
 		<a href="../2_DBCPTest.jsp">처음으로</a>
 		<a href="./register.jsp">user5 등록</a>
@@ -59,6 +59,7 @@
 				<th>나이</th>
 				<th>주소</th>
 				<th>휴대폰</th>
+				<th>관리</th>
 			</tr>
 			<% for(User5Bean ub : users){ %>
 			<tr>
@@ -69,8 +70,8 @@
 				<td><%= ub.getAddress() %></td>
 				<td><%= ub.getHp() %></td>
 				<td>
-					<a href="./modify.jsp">수정</a>
-					<a href="#">삭제</a>
+					<a href="./modify.jsp?uid=<%= ub.getUid() %>">수정</a>
+					<a href="./delete.jsp?uid=<%= ub.getUid() %>">삭제</a>
 				</td>
 			</tr>
 			<% } %>

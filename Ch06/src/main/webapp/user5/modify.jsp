@@ -40,10 +40,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user5 수정</title>
+		<title>user::modify</title>
 	</head>
 	<body>
-		<h3>user5 수정</h3>
+		<h3>user 수정</h3>
 		
 		<a href="../2_DBCPTest.jsp">처음으로</a>
 		<a href="./list.jsp">user5 목록</a>
@@ -56,23 +56,23 @@
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><input type="text" name="name" value="<%= ub.getName() %>"/></td>
+					<td><input type="text" name="name" placeholder="<%= ub.getName() %>"/></td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="date" name="birth" value="<%= ub.getBirth() %>"/></td>
+					<td><input type="date" name="birth" placeholder="<%= ub.getBirth() %>"/></td>
 				</tr>
 				<tr>
 					<td>나이</td>
-					<td><input type="number" name="age" value="<%= ub.getAge() %>"/></td>
+					<td><input type="number" name="age" placeholder="<%= ub.getAge() %>"/></td>
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" name="address" value="<%= ub.getAddress() %>"/></td>
+					<td><input type="text" name="address" placeholder="<%= ub.getAddress() %>"/></td>
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td><input type="text" name="hp" value="<%= ub.getHp() %>"/></td>
+					<td><input type="text" name="hp" placeholder="<%= ub.getHp() %>"/></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="right">

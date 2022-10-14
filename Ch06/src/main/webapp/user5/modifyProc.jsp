@@ -16,7 +16,7 @@
 	// 데이터베이스 작업
 	try{
 		Connection conn = DBCP.getConnection();
-		String sql = "UPDATE SET `name`=?, `birth`=?, `age`=?, `addr`=?, `hp`=? WHERE `uid`=?";
+		String sql = "UPDATE `user5` SET `name`=?, `birth`=?, `age`=?, `addr`=?, `hp`=? WHERE `uid`=?";
 		PreparedStatement psmt = conn.prepareStatement(sql);
 		psmt.setString(1, name);
 		psmt.setString(2, birth);
