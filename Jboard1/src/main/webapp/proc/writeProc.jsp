@@ -7,30 +7,29 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="kr.co.jboard1.db.Sql"%>
-<%@page import="kr.co.jboard1.db.DBCP"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="kr.co.jboard1.db.DBCP"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-
 	// multipart 폼 데이터 수신
 	String savePath = application.getRealPath("/file");
 	int maxSize = 1024 * 1024 * 10;
 	MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
-	
-	String title 	= mr.getParameter("title");
-	String content  = mr.getParameter("content");
-	String uid 		= mr.getParameter("uid");
-	String fname	= mr.getFilesystemName("fname");
-	String regip 	= request.getRemoteAddr();
+	String title   = mr.getParameter("title");
+	String content = mr.getParameter("content");
+	String uid     = mr.getParameter("uid");
+	String fname   = mr.getFilesystemName("fname");
+	String regip   = request.getRemoteAddr();
 	
 	//System.out.println("fname : "+fname);
 	int parent = 0;
 	
-	try {
+	try{
 		Connection conn = DBCP.getConnection();
 		// 트랜젝션 시작
 		conn.setAutoCommit(false);
+		
 		PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
 		Statement stmt = conn.createStatement();
 		
@@ -54,12 +53,14 @@
 		stmt.close();
 		psmt.close();
 		conn.close();
-	} catch (Exception e){
+		
+	}catch(Exception e){
 		e.printStackTrace();
 	}
 	
 	// 파일을 첨부했으면
 	if(fname != null){
+		
 		// 파일명 수정
 		int i = fname.lastIndexOf(".");
 		String ext = fname.substring(i);
@@ -74,8 +75,7 @@
 		f1.renameTo(f2);
 		
 		// 파일 테이블 Insert
-		
-		try {
+		try{
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
 			psmt.setInt(1, parent);
@@ -83,15 +83,13 @@
 			psmt.setString(3, fname);
 			
 			psmt.executeUpdate();
-			psmt.close();
-			conn.close();
 			
-		} catch(Exception e){
+			psmt.close();
+			conn.close();			
+		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
 	}
 	
 	response.sendRedirect("/Jboard1/list.jsp");
-
 %>

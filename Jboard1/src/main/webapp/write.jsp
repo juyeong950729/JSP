@@ -25,7 +25,7 @@
            </table>
            <div>
                <a href="/Jboard1/list.jsp" class="btn btnCancel">취소</a>
-               <input type="submit" value="작성완료" class="btn btnComplete">
+               <input type="submit" value="작성완료" class="btn btnComplete"/>
            </div>
        </form>
     </section>
