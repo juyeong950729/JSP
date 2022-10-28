@@ -14,7 +14,14 @@ public class ArticleBean {
 	private String regip;
 	private String rdate;
 	
+	private String fname;
 	private String nick;
+	
+	private int fno;
+	private int pno;
+	private String newName;
+	private String oriName;
+	private int download;
 	
 	
 	public int getNo() {
@@ -89,6 +96,43 @@ public class ArticleBean {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	public int getPno() {
+		return pno;
+	}
+	public void setPno(int pno) {
+		this.pno = pno;
+	}
+	public String getNewName() {
+		return newName;
+	}
+	public void setNewName(String newName) {
+		this.newName = newName;
+	}
+	public String getOriName() {
+		return oriName;
+	}
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
+	}
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	
 	
 	
 }

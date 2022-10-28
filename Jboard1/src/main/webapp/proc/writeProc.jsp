@@ -1,3 +1,5 @@
+<%@page import="kr.co.jboard1.bean.ArticleBean"%>
+<%@page import="kr.co.jboard1.dao.ArticleDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.io.File"%>
@@ -12,6 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+
 	// multipart 폼 데이터 수신
 	String savePath = application.getRealPath("/file");
 	int maxSize = 1024 * 1024 * 10;
@@ -22,41 +25,16 @@
 	String fname   = mr.getFilesystemName("fname");
 	String regip   = request.getRemoteAddr();
 	
-	//System.out.println("fname : "+fname);
-	int parent = 0;
+	ArticleBean ab = new ArticleBean();
+	ab.setTitle(title);
+	ab.setContent(content);
+	ab.setUid(uid);
+	ab.setFname(fname);
+	ab.setRegip(regip);
 	
-	try{
-		Connection conn = DBCP.getConnection();
-		// 트랜젝션 시작
-		conn.setAutoCommit(false);
-		
-		PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
-		Statement stmt = conn.createStatement();
-		
-		psmt.setString(1, title);
-		psmt.setString(2, content);
-		psmt.setInt(3, fname == null ? 0 : 1);
-		psmt.setString(4, uid);
-		psmt.setString(5, regip);
-		
-		psmt.executeUpdate();
-		ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
-		
-		// 작업확정
-		conn.commit();
-		
-		if(rs.next()){
-			parent = rs.getInt(1);
-		}
-		
-		rs.close();
-		stmt.close();
-		psmt.close();
-		conn.close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+	//System.out.println("fname : "+fname);
+	ArticleDAO dao = ArticleDAO.getInstance();
+	int parent = dao.insertArticle(ab);
 	
 	// 파일을 첨부했으면
 	if(fname != null){
@@ -75,20 +53,7 @@
 		f1.renameTo(f2);
 		
 		// 파일 테이블 Insert
-		try{
-			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
-			psmt.setInt(1, parent);
-			psmt.setString(2, newName);
-			psmt.setString(3, fname);
-			
-			psmt.executeUpdate();
-			
-			psmt.close();
-			conn.close();			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		dao.insertFile(parent, newName, fname);
 	}
 	
 	response.sendRedirect("/Jboard1/list.jsp");
