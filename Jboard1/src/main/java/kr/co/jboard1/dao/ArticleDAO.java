@@ -179,7 +179,7 @@ public class ArticleDAO {
 	
 	}
 	
-public List<ArticleBean> selectArticles(int limitStart) {
+	public List<ArticleBean> selectArticles(int limitStart) {
 		
 		List<ArticleBean> articles = new ArrayList<>();
 		
@@ -315,6 +315,41 @@ public List<ArticleBean> selectArticles(int limitStart) {
 		}
 	}
 	
+	public int updateComment(String no, String content) {
+		int result = 0;
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_COMMENT);
+			psmt.setString(1, content);
+			psmt.setString(2, no);
+			
+			result = psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	public void deleteArticle() {}
+	
+	public int deleteComment(String no) {
+		int result = 0;
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, no);
+			
+			result = psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 
 }
