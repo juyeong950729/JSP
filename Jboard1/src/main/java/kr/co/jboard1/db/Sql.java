@@ -70,6 +70,12 @@ public class Sql {
 														+ "JOIN `board_user` AS b USING (`uid`) "
 														+ "WHERE `parent`!=0 ORDER BY `no` DESC LIMIT 1";
 	
+	public static final String UPDATE_ARTICLE = "UPDATE `board_article` SET "
+												+ "`title` = ?, "
+												+ "`content` = ?, "
+												+ "`rdate` = NOW() "
+												+ "WHERE `no`=?";
+	
 	public static final String UPDATE_ARTICLE_HIT = "UPDATE `board_article` SET `hit` = `hit` + 1\r\n"
 													+ "WHERE `no` = ?";
 	
@@ -80,6 +86,10 @@ public class Sql {
 												+ "`rdate` = NOW() "
 												+ "WHERE `no`=?";
 	
+	public static final String DELETE_ARTICLE = "DELETE FROM `board_article` WHERE `no`=? or `parent`=?";
+	
 	public static final String DELETE_COMMENT = "DELETE FROM `board_article` WHERE `no`=?";
+	
+	public static final String DELETE_FILE = "DELETE FROM `board_file` WHERE `parent`=?";
 	
 }

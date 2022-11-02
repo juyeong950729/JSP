@@ -22,7 +22,7 @@ public class ArticleDAO {
 	private ArticleDAO() {}
 	
 	// 기본 CRUD
-	public int insertArticle(ArticleBean ab) {
+	public int insertArticle(ArticleBean article) {
 		int parent = 0;
 		
 		try{
@@ -33,11 +33,11 @@ public class ArticleDAO {
 			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
 			Statement stmt = conn.createStatement();
 			
-			psmt.setString(1, ab.getTitle());
-			psmt.setString(2, ab.getContent());
-			psmt.setInt(3, ab.getFname() == null ? 0 : 1);
-			psmt.setString(4, ab.getUid());
-			psmt.setString(5, ab.getRegip());
+			psmt.setString(1, article.getTitle());
+			psmt.setString(2, article.getContent());
+			psmt.setInt(3, article.getFname() == null ? 0 : 1);
+			psmt.setString(4, article.getUid());
+			psmt.setString(5, article.getRegip());
 			
 			psmt.executeUpdate();
 			ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
@@ -285,7 +285,20 @@ public class ArticleDAO {
 		return comments;
 	}
 	
-	public void updteArticle() {}
+	public void updateArticle(String no, String title, String content) {
+		try{
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, no);
+			psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void updateArticleHit(String no) {
 		
@@ -333,7 +346,19 @@ public class ArticleDAO {
 		return result;
 	}
 	
-	public void deleteArticle() {}
+	public void deleteArticle(String no) {
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public int deleteComment(String no) {
 		int result = 0;
@@ -350,6 +375,39 @@ public class ArticleDAO {
 		}
 		
 		return result;
+	}
+	
+	public String deleteFile(String no) {
+		
+		String newName = null;
+		
+		try {
+			Connection conn = DBCP.getConnection();
+			
+			conn.setAutoCommit(false);
+			PreparedStatement psmt1 = conn.prepareStatement(Sql.SELECT_FILE);
+			PreparedStatement psmt2 = conn.prepareStatement(Sql.DELETE_FILE);
+			
+			psmt1.setString(1, no);
+			psmt2.setString(1, no);
+			
+			ResultSet rs = psmt1.executeQuery();
+			psmt2.executeUpdate();
+			
+			conn.commit();
+			
+			if(rs.next()) {
+				newName = rs.getString(3);
+			}
+			
+			psmt1.close();
+			psmt2.close();
+			conn.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return newName;
 	}
 
 }

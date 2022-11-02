@@ -1,7 +1,7 @@
 <%@page import="kr.co.jboard1.bean.UserBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-
+	String result = request.getParameter("result");
 	UserBean ub = (UserBean)session.getAttribute("sessUser");
 
 	if(ub == null){
@@ -16,6 +16,16 @@
     <title>게시판 제목</title>
     <link rel="stylesheet" href="/Jboard1/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/Jboard1/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script>
+		let result = "<%= result %>";
+		
+		if (result == '201'){
+			alert('수정 완료!');
+		} else if (result == '202'){
+			alert('삭제 완료!');
+		}
+	</script>
 </head>
 <body>
     <div id="wrapper">

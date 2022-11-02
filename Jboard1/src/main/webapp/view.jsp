@@ -18,7 +18,7 @@
 	dao.updateArticleHit(no);
 	
 	// 글 가져오기
-	ArticleBean ab = dao.selectArticle(no);
+	ArticleBean article = dao.selectArticle(no);
 	
 	// 댓글 가져오기
 	List<ArticleBean> comments = dao.selectComments(no);
@@ -26,7 +26,18 @@
 %>
 <%@ include file="./_header.jsp" %>
 <script>
+
 	$(document).ready(function(){
+		
+		// 글 삭제
+		$('.btnRemove').click(function(e){
+			let isDelete = confirm('정말 삭제 하시겠습니까?');
+			if(isDelete){
+				return true;
+			}else{
+				return false;
+			}
+		});
 		
 		// 댓글 삭제
 		$(document).on('click', '.remove', function(e){
@@ -159,27 +170,29 @@
                   <caption>글수정</caption>
                       <tr>
                           <th>제목</th>
-                          <td><input type="text" name="title" value="<%= ab.getTitle()%>" readonly></td>
+                          <td><input type="text" name="title" value="<%= article.getTitle()%>" readonly></td>
                       </tr>
-                      <% if(ab.getFile() > 0){ %>
+                      <% if(article.getFile() > 0){ %>
                       <tr>
                           <th>첨부파일</th>
                           <td>
-                              <a href="/Jboard1/proc/download.jsp?parent=<%= ab.getNo() %>"><%= ab.getOriName() %></a>
-                              &nbsp;<span><%= ab.getDownload() %></span>회 다운로드
+                              <a href="/Jboard1/proc/download.jsp?parent=<%= article.getNo() %>"><%= article.getOriName() %></a>
+                              &nbsp;<span><%= article.getDownload() %></span>회 다운로드
                           </td>
                       </tr>
                       <% } %>
                       <tr>
                           <th>내용</th>
                           <td>
-                              <textarea name="content" readonly><%= ab.getContent() %></textarea>
+                              <textarea name="content" readonly><%= article.getContent() %></textarea>
                           </td>
                       </tr>
               </table>
               <div>
-                  <a href="#" class="btn btnRemove">삭제</a>
-                  <a href="/Jboard1/modify.jsp" class="btn btnModify">수정</a>
+              	  <% if(ub.getUid().equals(article.getUid())){ %>
+                  <a href="/Jboard1/proc/deleteProc.jsp?no=<%= article.getNo() %>&pg=<%= pg %>" class="btn btnRemove">삭제</a>
+                  <a href="/Jboard1/modify.jsp?no=<%= article.getNo() %>&pg=<%= pg %>" class="btn btnModify">수정</a>
+                  <% } %>
                   <a href="/Jboard1/list.jsp?pg=<%= pg %>" class="btn btnList">목록</a>
               </div>
 
@@ -192,10 +205,12 @@
                   <span class="nick"><%= comment.getNick() %></span>
                   <span class="date"><%= comment.getRdate().substring(2, 10) %></span>
                   <p class="content"><%= comment.getContent() %></p>
+                  <% if(ub.getUid().equals(comment.getUid())){ %>
                   <div>
                       <a href="#" class="remove" data-no="<%= comment.getNo() %>">삭제</a>
                       <a href="#" class="modify" data-no="<%= comment.getNo() %>">수정</a>
                   </div>
+                  <% } %>
               </article>
               <% } %>
 

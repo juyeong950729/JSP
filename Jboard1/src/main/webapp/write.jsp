@@ -1,8 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+	let oEditors = []
+	
+	smartEditor = function() {
+	  console.log("Naver SmartEditor")
+	  nhn.husky.EZCreator.createInIFrame({
+	    oAppRef: oEditors,
+	    elPlaceHolder: "editorTxt",
+	    sSkinURI: "/Jboard1/smarteditor/SmartEditor2Skin.html",
+	    fCreator: "createSEditor2"
+	  })
+	}
+	
+	$(document).ready(function() {
+	  smartEditor()
+	});
+	
+</script>
 <main id="board">
     <section class="write">
-       <form action="/Jboard1/proc/writeProc.jsp" method="post" enctype="multipart/form-data">
+       <form action="/Jboard1/proc/writeProc.jsp" method="post" enctype="multipart/form-data" id="form">
            <input type="hidden" name="uid" value="<%= ub.getUid() %>"/>
            <table border="0">
                <caption>글쓰기</caption>
@@ -13,7 +31,7 @@
                <tr>
                    <th>내용</th>
                    <td>
-                       <textarea name="content"></textarea>
+                       <textarea name="content" id="editorTxt" rows="10" cols="100" style="width: 100%"></textarea>
                    </td>
                </tr>
                <tr>
