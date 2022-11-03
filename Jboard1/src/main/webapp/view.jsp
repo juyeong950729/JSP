@@ -49,7 +49,8 @@
 				
 				let article = $(this).closest('article');
 				let no = $(this).attr('data-no');
-				let jsonData = {"no": no};
+				let parent = $(this).attr('data-parent');
+				let jsonData = {"no": no, "parent": parent};
 				
 				$.ajax({
 					url: '/Jboard1/proc/commentDeleteProc.jsp',
@@ -207,7 +208,7 @@
                   <p class="content"><%= comment.getContent() %></p>
                   <% if(ub.getUid().equals(comment.getUid())){ %>
                   <div>
-                      <a href="#" class="remove" data-no="<%= comment.getNo() %>">삭제</a>
+                      <a href="#" class="remove" data-no="<%= comment.getNo() %>" data-parent="<%= comment.getParent() %>">삭제</a>
                       <a href="#" class="modify" data-no="<%= comment.getNo() %>">수정</a>
                   </div>
                   <% } %>
