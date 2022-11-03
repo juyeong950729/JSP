@@ -42,38 +42,42 @@
 		<meta charset="UTF-8">
 		<title>shop::product</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-		<script src="./js/register.js"></script>
 		<script>
-		$(document).ready(function(){
+		$(function(){
 
-			$(document).on('click', '#btnRegister', function(e){
-				e.preventDefault();
-
-				let prodNo = $('input[name=orderProduct]').val();
-				let amount = $('input[name=orderCount]').val();
-				let custid = $('input[name=orderId]').val();
-
-				let jsonData = {
-					"orderProduct":orderProduct,
-					"orderCount":orderCount,
-					"orderId":orderId
-					};
-				
-				$.ajax({
-					url: './data/register.jsp',
-					method: 'post',
-					data: jsonData,
-					dataType: 'json',
-					success: function(data){
-						if (data.result == 1){
-							alert('주문완료!');
-						} else {
-							alert('다시 시도해주세요.);
-						}
-					}
-
+				$('.btnOrder').click(function(){
+					let prodNo = $(this).val();
+					$('section').show().find('input[name=prodNo]').val(prodNo);
 				});
-			});
+				
+				$('.btnClose').click(function(){
+					$('section').hide();
+				});
+				
+				$('input[type=submit]').click(function(){
+					
+					let prodNo 		= $('input[name=prodNo]').val();
+					let prodCount 	= $('input[name=prodCount]').val();
+					let prodOrderer = $('input[name=prodOrderer]').val();
+					
+					let jsonData = {
+							"prodNo":prodNo,
+							"prodCount":prodCount,
+							"prodOrderer":prodOrderer
+					};
+					
+					$.post('./registerProc.jsp', jsonData, function(data){
+						
+						if(data.result > 0){
+							alert('주문 완료!');
+						} else {
+							alert('주문 실패!');
+						}
+						
+					});
+					
+					
+				});
 			});
 		</script>
 	</head>
@@ -98,12 +102,32 @@
 				<td><%= pb.getStock() %></td>
 				<td><%= pb.getPrice() %></td>
 				<td><%= pb.getCompany() %></td>
-				<td><input type="submit" value="주문" id="btnRegister"></td>
+				<td><button class="btnOrder" value="<%= pb.getProdNo() %>">주문</button></td>
 			</tr>
 			<% } %>
 		</table>
-		<nav></nav>
-		<section>
+
+		<section style="display:none;">
+			<h4>주문하기</h4>
+			<table border="1">
+				<tr>
+					<td>상품번호</td>
+					<td><input type="text" name="prodNo" readonly/></td>
+				</tr>
+				<tr>
+					<td>수량</td>
+					<td><input type="text" name="prodCount"/></td>
+				</tr>
+				<tr>
+					<td>주문자</td>
+					<td><input type="text" name="prodOrderer"/></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right"><input type="submit" value="주문하기"/></td>
+				</tr>
+			</table>
+			<button class="btnClose">닫기</button>
 		</section>
+
 	</body>
 </html>
