@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="bean.RegisterBean"%>
@@ -20,8 +21,6 @@
 	String StdName = request.getParameter("StdName");
 	
 	List<RegisterBean> registers = new ArrayList<>();
-	
-	int result = 0;
 	
 	try {
 		Connection conn = DBCP.getConnection();
@@ -48,11 +47,12 @@
 		e.printStackTrace();
 	}
 	
-	JsonObject json = new JsonObject();
-	json.addProperty("result", result);
+	// List를 JSON 변환
+	Gson gson = new Gson();
+	String jsonData = gson.toJson(registers);
 	
-	String jsonData = json.toString();
-	
+	// JSON 출력
 	out.print(jsonData);
+	
 	
 %>

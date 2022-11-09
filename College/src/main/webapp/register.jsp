@@ -61,8 +61,7 @@
 			});
 			
 			$('input[type=submit]').click(function(){
-				let RegStdNo = $('input[name=RegStdNo]').val();
-				let 
+				
 			});
 			
 			$(document).on('click', '#Search', function(e){
@@ -75,18 +74,29 @@
 				};
 				
 				$.ajax({
-					url: './data/register.jsp',
-					method: 'post',
-					data: jsonData,
-					dataType: 'json',
-					success: function(data){
-						if(data.result == 1){
-							alert('검색 완료!');
-						} else {
-							alert('검색 실패!');
-						}
-					}
-				})
+		 			url: './data/register.jsp',
+		 			method: 'get',
+		 			dataType: 'json',
+		 			success: function(data){
+		 				
+		 				for(let register of data){
+		 					
+		 					let tags = "<tr>";
+		 						tags += "<td>"+register.RegStdNo+"</td>";
+		 						tags += "<td>"+register.LecName+"</td>";
+		 						tags += "<td>"+register.StdName+"</td>";
+		 						tags += "<td>"+register.RegLecNo+"</td>";
+		 						tags += "<td>"+register.RegMidScore+"</td>";
+		 						tags += "<td>"+register.RegFinalScore+"</td>";
+		 						tags += "<td>"+register.RegTotalScore+"</td>";
+		 						tags += "<td>"+register.RegGrade+"</td>";
+		 						tags += "</tr>";
+		 						
+		 					$('table').append(tags);
+		 					
+		 				}
+		 			 }
+		 		});
 				
 			})
 		});

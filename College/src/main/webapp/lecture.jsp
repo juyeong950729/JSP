@@ -70,6 +70,18 @@
 				$.post('./proc/lectureProc.jsp', jsonData, function(data){
 					if (data.result > 0){
 						alert('등록 완료!');
+						
+						let tags = '<tr>';
+							tags += '<th>'+LecNo+'</th>';
+							tags += '<th>'+LecName+'</th>';
+							tags += '<th>'+LecCredit+'</th>';
+							tags += '<th>'+LecTime+'</th>';
+							tags += '<th>'+LecClass+'</th>';
+							tags += '</tr>';
+						
+						
+						$('.lecture').append(tags);
+						
 					} else {
 						alert('등록 실패!');
 					}
@@ -89,7 +101,7 @@
 		
 		<h4>강좌현황</h4>
 		<button class="btnL">등록</button>
-		<table border="1">
+		<table border="1" class="lecture">
 			<tr>
 				<th>번호</th>
 				<th>강좌명</th>
