@@ -28,7 +28,7 @@ public class DBHelper {
 		try {
 			if (rs != null) rs.close();
 			if (stmt != null) stmt.close();
-			if (psmt != null) stmt.close();
+			if (psmt != null) psmt.close();
 			if (conn != null) conn.close();
 		} catch(Exception e) {
 			e.printStackTrace();

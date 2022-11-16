@@ -29,7 +29,6 @@ public class UserDAO extends DBHelper {
 			psmt.executeUpdate();
 			
 			close();
-			close();
 			
 		} catch (Exception e){
 			e.printStackTrace();
