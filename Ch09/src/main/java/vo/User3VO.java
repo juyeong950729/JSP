@@ -30,6 +30,9 @@ public class User3VO {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	public void setAge(String age) {
+		this.age = Integer.parseInt(age);
+	}
 	
 	
 

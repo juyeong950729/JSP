@@ -1,5 +1,7 @@
-package controller.user2;
+package controller.user3;
+
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,15 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.User1DAO;
-import dao.User2DAO;
-import vo.User1VO;
-import vo.User2VO;
+import dao.User3DAO;
+import vo.User3VO;
 
+@WebServlet("/user3/list.do")
+public class ListController extends HttpServlet {
 
-@WebServlet("/user2/register.do")
-public class RegisterController extends HttpServlet {
-	
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -25,30 +24,17 @@ public class RegisterController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user2/register.jsp");
+		List<User3VO> users = User3DAO.getInstance().selectUser3s();
+		req.setAttribute("users", users);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user3/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String uid 	= req.getParameter("uid");
-		String name = req.getParameter("name");
-		String hp 	= req.getParameter("hp");
-		String age 	= req.getParameter("age");
-		
-		User2VO vo = new User2VO();
-		vo.setUid(uid);
-		vo.setName(name);
-		vo.setHp(hp);
-		vo.setAge(age);
-		
-		User2DAO.getInstance().insertUser2(vo);
-		
-		// 리다이렉트
-		resp.sendRedirect("/Ch09/user2/list.do");
-		
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
 	}
-
+	
 
 }
