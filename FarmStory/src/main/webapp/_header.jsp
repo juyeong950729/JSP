@@ -1,4 +1,8 @@
+<%@page import="kr.co.farmstory.vo.UserVO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	UserVO sessUser = (UserVO) session.getAttribute("sessUser");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +11,7 @@
     <link rel="stylesheet" href="/FarmStory/css/style.css">
     <link rel="stylesheet" href="/FarmStory/user/css/style.css">
     <link rel="stylesheet" href="/FarmStory/board/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -16,8 +21,12 @@
             </a>
             <p>
                 <a href="/FarmStory/">HOME |</a>
+                <% if (sessUser == null){ %>
                 <a href="/FarmStory/user/login.jsp">로그인 |</a>
                 <a href="/FarmStory/user/terms.jsp">회원가입 |</a>
+                <% }else{ %>
+                <a href="/FarmStory/user/proc/logout.jsp">로그아웃 |</a>
+                <% } %>
                 <a href="#">고객센터</a>
             </p>
             <img src="/FarmStory/img/head_txt_img.png" alt="3만원 이상 무료배송">

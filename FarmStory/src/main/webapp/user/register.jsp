@@ -1,15 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/_header.jsp" %>
+<script src="/FarmStory/js/validation.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/FarmStory/js/zipcode.js"></script>
 <main id="user">
     <section class="register">
-       <form action="#" method="post"> 
+       <form action="/FarmStory/user/proc/registerProc.jsp" method="post"> 
             <table border="1">
             	<caption>사이트 이용정보 입력</caption>
                 <tr>
                     <td>아이디</td>
                     <td>
                         <input type="text" name="uid" placeholder="아이디 입력">
-                        <button type="button" id="btnIdCheck"><img src="/Jboard1/img/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnIdCheck"><img src="/FarmStory/user/img/chk_id.gif" alt="중복확인"/></button>
                         <span class="uidResult"></span>
                     </td>
                 </tr>
@@ -39,7 +42,7 @@
                     <td>별명</td>
                     <td>
                         <input type="text" name="nick" placeholder="별명 입력">
-                        <button type="button" id="btnNickCheck"><img src="/Jboard1/img/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnNickCheck"><img src="/FarmStory/user/img/chk_id.gif" alt="중복확인"/></button>
                         <span class="nickResult"></span>
                     </td>
                 </tr>
@@ -56,7 +59,7 @@
                     <td>주소</td>
                     <td>
                         <input type="text" name="zip" id="zip" placeholder="우편번호" readonly="readonly"/>
-                        <button type="button" onclick="zipcode()"><img src="/Jboard1/img/chk_post.gif" alt="우편번호찾기"/></button>
+                        <button type="button" onclick="zipcode()"><img src="/FarmStory/user/img/chk_post.gif" alt="우편번호찾기"/></button>
                         <input type="text" name="addr1" id="addr1" placeholder="주소 검색"/>
                         <input type="text" name="addr2" id="addr2" placeholder="상세주소 입력"/>
                     </td>
