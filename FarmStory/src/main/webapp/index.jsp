@@ -1,5 +1,53 @@
+<%@page import="kr.co.farmstory.vo.ArticleVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.farmstory.dao.ArticleDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<%
+	List<ArticleVO> latests = ArticleDAO.getInstance().selectLatests("grow", "school", "story");
+
+	if(latests.size() < 15){
+		
+		ArticleVO art = new ArticleVO();
+		art.setNo(0);
+		art.setTitle("무제");
+		art.setRdate("00-00-00");
+		
+		for(int i=0; i<15; i++){
+			latests.add(art);
+		}
+	}
+
+%>
+<script>
+	$(function(){
+		
+		// 공지사항 최신글 가져오기
+		$.get('/FarmStory/board/proc/getLatest.jsp?cate=notice', function(data){
+			for (let latest of data){
+				let url = "./board/view.jsp?group=community&cate=notice&no="+latest.no+"&pg=1";
+				$('#tabs-1 .txt').append("<li><a href='"+url+"'>+"latest.title+"</a></li>");
+			}
+		});
+		
+		// 공지사항 최신글 가져오기
+		$.get('/FarmStory/board/proc/getLatest.jsp?cate=qna', function(data){
+			for (let latest of data){
+				let url = "./board/view.jsp?group=community&cate=qna&no="+latest.no+"&pg=1";
+				$('#tabs-2 .txt').append("<li><a href='"+url+"'>+"latest.title+"</a></li>");
+			}
+		});
+		
+		// 공지사항 최신글 가져오기
+		$.get('/FarmStory/board/proc/getLatest.jsp?cate=faq', function(data){
+			for (let latest of data){
+				let url = "./board/view.jsp?group=community&cate=faq&no="+latest.no+"&pg=1";
+				$('#tabs-3 .txt').append("<li><a href='"+url+"'>+"latest.title+"</a></li>");
+			}
+		});
+		
+	});
+</script>
 <main>
     <div class="slider">
         <ul>
@@ -31,43 +79,17 @@
             </a>
             <img src="/FarmStory/img/main_latest1_img.jpg" alt="이미지">
             <table border="0">
-                <tbody>
+                <% for(int i=0; i<5; i++){ 
+                	ArticleVO art = latests.get(i);
+                %>
                     <tr>
                         <td>></td>
                         <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
+                            <a href="/FarmStory/board/view.jsp?group=croptalk&cate=grow&no=<%= art.getNo() %>&pg=1"><%= art.getTitle() %></a>
                         </td>
-                        <td>20-12-22</td>
+                        <td><%= art.getRdate() %></td>
                     </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                </tbody>
+                <% } %>
             </table>
         </div>
         <div>
@@ -76,43 +98,17 @@
             </a>
             <img src="/FarmStory/img/main_latest2_img.jpg" alt="이미지">
             <table border="0">
-                <tbody>
+                <% for(int i=5; i<10; i++){ 
+                	ArticleVO art = latests.get(i);
+                %>
                     <tr>
                         <td>></td>
                         <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
+                            <a href="/FarmStory/board/view.jsp?group=croptalk&cate=school&no=<%= art.getNo() %>&pg=1"><%= art.getTitle() %></a>
                         </td>
-                        <td>20-12-22</td>
+                        <td><%= art.getRdate() %></td>
                     </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                </tbody>
+                <% } %>
             </table>
         </div>
         <div>
@@ -121,43 +117,17 @@
             </a>
             <img src="/FarmStory/img/main_latest3_img.jpg" alt="이미지">
             <table border="0">
-                <tbody>
+                <% for(int i=10; i<15; i++){ 
+                	ArticleVO art = latests.get(i);
+                %>
                     <tr>
                         <td>></td>
                         <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
+                            <a href="/FarmStory/board/view.jsp?group=croptalk&cate=story&no=<%= art.getNo() %>&pg=1"><%= art.getTitle() %></a>
                         </td>
-                        <td>20-12-22</td>
+                        <td><%= art.getRdate() %></td>
                     </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                    <tr>
-                        <td>></td>
-                        <td>
-                            <a href="#">토마토! 건강하게 길러서 안심하고 먹자</a>
-                        </td>
-                        <td>20-12-22</td>
-                    </tr>
-                </tbody>
+                <% } %>
             </table>
         </div>
     </div>
@@ -201,7 +171,36 @@
                 예 금 주 (주)팜스토리
             </p>
         </div>
-        <div>3</div>
+        <div>
+        	<div id="tabs">
+        		<ul>
+        			<li><a href="#tabs-1">공지사항</a></li>
+        			<li><a href="#tabs-2">1:1 고객문의</a></li>
+        			<li><a href="#tabs-3">자주 묻는 질문</a></li>
+        		</ul>
+        		<div id="tabs-1">
+        			<ul class="txt">
+        				<li>공지사항입니다.</li>
+        				<li>공지사항입니다.</li>
+        				<li>공지사항입니다.</li>
+        			</ul>
+        		</div>
+        		<div id="tabs-2">
+        			<ul class="txt">
+        			    <li>공지사항입니다.</li>
+        				<li>공지사항입니다.</li>
+        				<li>공지사항입니다.</li>
+        			</ul>
+        		</div>
+        		<div id="tabs-3">
+        			<ul class="txt">
+        				<li>공지사항입니다.</li>
+        				<li>공지사항입니다.</li>
+        				<li>공지사항입니다.</li>
+        			</ul>
+        		</div>
+        	</div>
+        </div>
     </div>
 </main>
 <%@ include file="./_footer.jsp" %>

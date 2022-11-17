@@ -51,7 +51,7 @@
 	// 현재 페이지 게시물 가져오기
 	List<ArticleVO> articles = ArticleDAO.getInstance().selectArticles(cate, start);
 	
-	pageContext.include("/board/_"+group+".jsp");
+	pageContext.include("./_"+group+".jsp");
 
 %>
 <main id="board">
@@ -67,7 +67,7 @@
             </tr>
             <% for(ArticleVO art : articles){ %>
             <tr>
-                <td><%= art.getNo() %></td>
+                <td><%= PageStartNum-- %></td>
                 <td><a href="./view.jsp?group=<%= group %>&cate=<%= cate %>&no<%= art.getNo() %>&pg=<%= currentPage %>"><%= art.getTitle() %>[<%= art.getComment() %>]</a></td>
                 <td><%= art.getNick() %></td>
                 <td><%= art.getRdate().substring(2, 10) %></td>

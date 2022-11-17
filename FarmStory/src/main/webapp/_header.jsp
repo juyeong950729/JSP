@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/FarmStory/css/style.css">
     <link rel="stylesheet" href="/FarmStory/user/css/style.css">
     <link rel="stylesheet" href="/FarmStory/board/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="wrapper">

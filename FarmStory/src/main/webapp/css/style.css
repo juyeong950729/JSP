@@ -89,6 +89,21 @@
     header > .gnb > li:nth-child(5) > a {
         background-image: url(../img/head_menu5.png);
     }
+    header > .gnb > li:nth-child(1) > a:hover {
+        background-image: url(../img/head_menu1_ov.png);
+    }
+    header > .gnb > li:nth-child(2) > a:hover {
+        background-image: url(../img/head_menu2_ov.png);
+    }
+    header > .gnb > li:nth-child(3) > a:hover {
+        background-image: url(../img/head_menu3_ov.png);
+    }
+    header > .gnb > li:nth-child(4) > a:hover {
+        background-image: url(../img/head_menu4_ov.png);
+    }
+    header > .gnb > li:nth-child(5) > a:hover {
+        background-image: url(../img/head_menu5_ov.png);
+    }
 
     /* 메인 */
     main {
@@ -133,6 +148,12 @@
     main > .slider > .banner > img:nth-child(3) {
         margin-left: 10px;
     }
+    
+    .bx-wrapper {            
+    box-shadow: none;
+    border: none;
+    background: #fff;
+	}
 
 
     main > .quick {
@@ -228,7 +249,22 @@
         border-right: 1px solid #d7d7d7;
         box-sizing: border-box;
     }
-    main > .info > div:nth-child(3) {width: 358px;}
+    main > .info > div:nth-child(3) {
+    	width: 358px;
+    	padding-left: 10px;
+    	box-sizing: border-box;
+    }
+    
+    /* 탭 커스텀 */
+    
+	#tabs .txt > li {
+		border-bottom : 1px solid #d1d1d1;
+		line-height: 26px;
+	}
+	
+	#tabs .txt > li > a {
+		color: #666;
+	}
 
     /* 푸터 */
     footer {
@@ -394,3 +430,15 @@
     #sub > .cate5 .lnb > li:nth-child(5) > a {background-image: url(../img/sub_cate5_lnb5.png);}
     #sub > .cate5 .lnb > li:nth-child(5) > a:hover {background-image: url(../img/sub_cate5_lnb5_ov.png);}
     #sub > .cate5 .lnb > li:nth-child(5).on > a {background-image: url(../img/sub_cate5_lnb5_ov.png);}
+    
+    /* user */
+	#sub > .user > article {
+		float: none;
+		width: 100%;
+	    min-height: auto;
+		padding: 0 40px;
+	}
+	
+	#sub > .user > article > nav {
+		width: 100%;
+	}
