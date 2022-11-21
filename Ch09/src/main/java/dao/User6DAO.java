@@ -7,5 +7,11 @@ public class User6DAO {
 		return instance;
 	}
 	private User6DAO() {}
+	
+	public void insertUser6() {}
+	public void selectUser6() {}
+	public void selectUser6s() {}
+	public void updateUser6() {}
+	public void deleteUser6() {}
 
 }
