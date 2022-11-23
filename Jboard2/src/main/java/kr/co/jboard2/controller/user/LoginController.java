@@ -8,13 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import kr.co.jboard2.service.UserService;
 import kr.co.jboard2.vo.UserVO;
 
 @WebServlet("/user/login.do")
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private UserService service = UserService.INSTANCE;
 	
 	@Override
 	public void init() throws ServletException {
@@ -22,16 +25,32 @@ public class LoginController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String success = req.getParameter("success");
+		req.setAttribute("success", success);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/login.jsp");
 		dispatcher.forward(req, resp);
-		
-		String result = req.getParameter("result");
 		
 	}
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String uid = req.getParameter("uid");
+		String pass = req.getParameter("pass");
+		
+		UserVO vo = service.selectUser(uid, pass);
+		
+		if (vo != null) {
+			HttpSession sess = req.getSession();
+			sess.setAttribute("sessUser", vo);
+			resp.sendRedirect("/Jboard2/list.do");
+		} else {
+			resp.sendRedirect("/Jboard2/user/login.do?success=100");
+		}
+		
 	}
 	
 }

@@ -28,7 +28,9 @@ public enum UserService {
 		dao = new UserDAO();
 	}
 	
-	public void insertUser() {}
+	public void insertUser(UserVO vo) {
+		dao.insertUser(vo);
+	}
 	public TermsVO selectTerms() {
 		return dao.selectTerms();
 	}
@@ -43,8 +45,19 @@ public enum UserService {
 	public UserVO selectUser(String uid, String pass) {
 		return dao.selectUser(uid, pass);
 	}
+	
+	public UserVO selectUserForFindId(String name, String email) {
+		return dao.selectUserForFindId(name, email);
+	}
+	public UserVO selectUserForFindPw(String uid, String email) {
+		return dao.selectUserForFindPw(uid, email);
+	}
+	
 	public void selectUsers() {}
 	public void updateUser() {}
+	public int updateUserPassword(String uid, String pass) {
+		return dao.updateUserPassword(uid, pass);
+	}
 	public void deleteUser() {}
 	
 	public int[] sendEmailCode(String receiver) {

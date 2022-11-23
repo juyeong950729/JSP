@@ -30,7 +30,7 @@ public class NickAuthController extends HttpServlet {
 		int result = service.selectCountNick(nick);
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("nick", nick);
+		json.addProperty("result", result);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());

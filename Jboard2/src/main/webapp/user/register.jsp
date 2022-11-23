@@ -5,7 +5,7 @@
 <script src="/Jboard2/js/zipcode.js"></script>
 <main id="user">
     <section class="register">
-        <form action="#">
+        <form action="/Jboard2/user/register.do" method="post">
             <table border="1">
                 <caption>사이트 이용정보 입력</caption>
                 <tr>

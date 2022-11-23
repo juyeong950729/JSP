@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
 <main id="board">
     <section class="list">                
@@ -15,14 +16,16 @@
                 <th>글쓴이</th>
                 <th>날짜</th>
                 <th>조회</th>
-            </tr>                    
-            <tr>
-                <td>1</td>
-                <td><a href="/Jboard2/view.do">테스트 제목입니다.[3]</a></td>
-                <td>길동이</td>
-                <td>20-05-12</td>
-                <td>12</td>
             </tr>
+            <c:forEach var="article" items="${requestScope.articles}">                    
+            <tr>
+                <td>${article.no}</td>
+                <td><a href="/Jboard2/view.do">${article.title}</a></td>
+                <td>${article.uid}</td>
+                <td>${article.rdate}</td>
+                <td>${article.hit}</td>
+            </tr>
+            </c:forEach>
         </table>
 
         <div class="page">
