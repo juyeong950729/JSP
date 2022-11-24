@@ -21,8 +21,8 @@
             <tr>
                 <td>${article.no}</td>
                 <td><a href="/Jboard2/view.do">${article.title}</a></td>
-                <td>${article.uid}</td>
-                <td>${article.rdate}</td>
+                <td>${article.nick}</td>
+                <td>${article.rdate.substring(2,10)}</td>
                 <td>${article.hit}</td>
             </tr>
             </c:forEach>

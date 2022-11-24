@@ -17,10 +17,15 @@ public enum ArticleService {
 		dao = new ArticleDAO();
 	}
 	
-	public void insertArticle() {}
+	public void insertArticle(ArticleVO article) {
+		dao.insertArticle(article);
+	}
 	public void selectArticle() {}
 	public List<ArticleVO> selectArticles(int limitStart) {
 		return dao.selectArticles(limitStart);
+	}
+	public int selectCountTotal() {
+		return dao.selectCountTotal();
 	}
 	public void updateArticle() {}
 	public void deleteArticle() {}

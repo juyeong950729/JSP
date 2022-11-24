@@ -14,7 +14,22 @@ public class ArticleDAO extends DBHelper {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void insertArticle() {}
+	public void insertArticle(ArticleVO article) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			psmt.setString(1, article.getTitle());
+			psmt.setString(2, article.getContent());
+			psmt.setInt(3, article.getFile());
+			psmt.setString(4, article.getUid());
+			psmt.setString(5, article.getRegip());
+			psmt.executeUpdate();
+			
+			close();
+		} catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	public void selectArticle() {}
 	public List<ArticleVO> selectArticles(int limitStart) {
 		
@@ -39,6 +54,7 @@ public class ArticleDAO extends DBHelper {
 				article.setUid(rs.getString(9));
 				article.setRegip(rs.getString(10));
 				article.setRdate(rs.getString(11));
+				article.setNick(rs.getString(12));
 				articles.add(article);
 			}
 			close();
@@ -46,6 +62,23 @@ public class ArticleDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 		return articles;
+	}
+	public int selectCountTotal() {
+		
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
 	}
 	public void updateArticle() {}
 	public void deleteArticle() {}
