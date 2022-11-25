@@ -29,14 +29,18 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		int limitStart = 0;
+		String pg = req.getParameter("pg");
+		
+		int start = 0;
 		int currentPage = 1;
 		int total = 0;
 		int lastPageNum = 0;
-		int PageGroupCurrent = 1;
-		int PageGroupStart = 1;
-		int PageGroupEnd = 0;
 		int PageStartNum = 0;
+		
+		// 현재 페이지 게시물 limit 시작값 계산
+		if (pg != null) {
+			currentPage = Integer.parseInt(pg);
+		}
 		
 		// 전체 게시물 갯수 구하기
 		total = service.selectCountTotal();
@@ -49,21 +53,23 @@ public class ListController extends HttpServlet {
 		}
 		
 		// 페이지 그룹 계산
-		PageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
-		PageGroupStart = (PageGroupCurrent - 1) * 10 + 1;
-		PageGroupEnd = PageGroupCurrent * 10;
-		
-		if(PageGroupEnd > lastPageNum) {
-			PageGroupEnd = lastPageNum;
-		}
+		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 		
 		// 페이지 시작 번호 계산
-		PageStartNum = total - limitStart;
+		start = (currentPage - 1) * 10;
+		PageStartNum = total - start;
+		
+		start = (currentPage - 1) * 10;
 		
 		// 현재 페이지 게시물 가져오기
-		List<ArticleVO> articles = service.selectArticles(limitStart);
+		List<ArticleVO> articles = service.selectArticles(start);
 		
 		req.setAttribute("articles", articles);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("PageGroupStart", result[0]);
+		req.setAttribute("PageGroupEnd", result[1]);
+		req.setAttribute("PageStartNum", PageStartNum+1);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/list.jsp");
 		dispatcher.forward(req, resp);

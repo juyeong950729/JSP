@@ -30,20 +30,28 @@ public class LogoutController extends HttpServlet {
 		UserVO sessUser = (UserVO)sess.getAttribute("sessUser");
 		String uid = sessUser.getUid();
 		
-		// 세션 해제
-		sess.removeAttribute("sessUser");
-		sess.invalidate();
+		if (uid != null) {
+			
+			// 세션 해제
+			sess.removeAttribute("sessUser");
+			sess.invalidate();
+			
+			// 쿠키 삭제
+			Cookie cookie = new Cookie("SESSID", null);
+			cookie.setPath("/");
+			cookie.setMaxAge(0);
+			resp.addCookie(cookie);
+			
+			// 데이터베이스 사용자 sessId update
+			service.updateUserForSessionOut(uid);
+			
+			resp.sendRedirect("/Jboard2/user/login.do?success=200");
+			
+		} else {
+			
+			resp.sendRedirect("/Jboard2/user/login.do");
+		}
 		
-		// 쿠키 삭제
-		Cookie cookie = new Cookie("SESSID", null);
-		cookie.setPath("/");
-		cookie.setMaxAge(0);
-		resp.addCookie(cookie);
-		
-		// 데이터베이스 사용자 sessId update
-		service.updateUserForSessionOut(uid);
-		
-		resp.sendRedirect("/Jboard2/user/login.do?success=200");
 	}
 	
 	@Override

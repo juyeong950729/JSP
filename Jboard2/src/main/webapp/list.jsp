@@ -17,26 +17,29 @@
                 <th>날짜</th>
                 <th>조회</th>
             </tr>
-            <c:forEach var="article" items="${requestScope.articles}">                    
+            <c:forEach var="article" items="${articles}">                    
             <tr>
-                <td>${article.no}</td>
-                <td><a href="/Jboard2/view.do">${article.title}</a></td>
+                <td>${PageStartNum = PageStartNum - 1}</td>
+                <td><a href="/Jboard2/view.do?no=${article.no}&pg=${currentPage}">${article.title}[${article.comment}]</a></td>
                 <td>${article.nick}</td>
-                <td>${article.rdate.substring(2,10)}</td>
+                <td>${article.rdate.substring(2, 10)}</td>
                 <td>${article.hit}</td>
             </tr>
             </c:forEach>
         </table>
 
         <div class="page">
-            <a href="#" class="prev">이전</a>
-            <a href="#" class="num current">1</a>
-            <a href="#" class="num">2</a>
-            <a href="#" class="num">3</a>
-            <a href="#" class="next">다음</a>
+        	<c:if test="${PageGroupStart > 1}">
+            	<a href="/Jboard2/list.do?pg=${PageGroupStart - 1}" class="prev">이전</a>
+            </c:if>
+            <c:forEach var="i" begin="${PageGroupStart}" end="${PageGroupEnd}">
+            	<a href="/Jboard2/list.do?pg=${i}" class="num ${currentPage == i?'current':'off'}">${i}</a>
+            </c:forEach>
+            <c:if test="${PageGroupEnd < lastPageNum}">
+            	<a href="/Jboard2/list.do?pg=${PageGroupEnd + 1}" class="next">다음</a>
+            </c:if>
         </div>
-
-        <a href="/Jboard2/write.do" class="btn btnWrite">글쓰기</a>
+        <a href="./write.do" class="btn btnWrite">글쓰기</a>
         
     </section>
 </main>
