@@ -40,14 +40,17 @@ public enum ArticleService {
 	public List<ArticleVO> selectArticles(int limitStart) {
 		return dao.selectArticles(limitStart);
 	}
+	public List<ArticleVO> selectArticlesByKeyword(String keyword, int start){
+		return dao.selectArticlesByKeyword(keyword, start);
+	}
 	public FileVO selectFile(String parent) {
 		return dao.selectFile(parent);
 	}
 	public List<ArticleVO> selectComments(String no) {
 		return dao.selectComments(no);
 	}
-	public int selectCountTotal() {
-		return dao.selectCountTotal();
+	public int selectCountTotal(String keyword) {
+		return dao.selectCountTotal(keyword);
 	}
 	public void updateArticle(String no, String title, String content) {
 		dao.updateArticle(no, title, content);

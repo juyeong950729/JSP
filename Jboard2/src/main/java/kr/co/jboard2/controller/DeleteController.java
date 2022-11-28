@@ -44,7 +44,7 @@ public class DeleteController extends HttpServlet {
 			}
 		}
 		
-		resp.sendRedirect("/Jboard2/list.jsp?pg="+pg+"&result=202");
+		resp.sendRedirect("/Jboard2/list.do?pg="+pg);
 
 		
 	}

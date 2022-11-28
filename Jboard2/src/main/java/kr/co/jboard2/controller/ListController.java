@@ -29,11 +29,11 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String pg = req.getParameter("pg");
+		String pg 	   = req.getParameter("pg");
+		String keyword = req.getParameter("search");
 		
 		int start = 0;
 		int currentPage = 1;
-		int total = 0;
 		int lastPageNum = 0;
 		int PageStartNum = 0;
 		
@@ -43,7 +43,7 @@ public class ListController extends HttpServlet {
 		}
 		
 		// 전체 게시물 갯수 구하기
-		total = service.selectCountTotal();
+		int total = service.selectCountTotal(keyword);
 		
 		// 페이지 마지막 번호 계산
 		if (total % 10 == 0) {
@@ -62,7 +62,13 @@ public class ListController extends HttpServlet {
 		start = (currentPage - 1) * 10;
 		
 		// 현재 페이지 게시물 가져오기
-		List<ArticleVO> articles = service.selectArticles(start);
+		List<ArticleVO> articles = null;
+		
+		if(keyword == null) {
+			articles = service.selectArticles(start);
+		} else {
+			articles = service.selectArticlesByKeyword(keyword, start);
+		}
 		
 		req.setAttribute("articles", articles);
 		req.setAttribute("currentPage", currentPage);
@@ -70,6 +76,7 @@ public class ListController extends HttpServlet {
 		req.setAttribute("PageGroupStart", result[0]);
 		req.setAttribute("PageGroupEnd", result[1]);
 		req.setAttribute("PageStartNum", PageStartNum+1);
+		req.setAttribute("search", keyword);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/list.jsp");
 		dispatcher.forward(req, resp);

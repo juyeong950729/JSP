@@ -9,12 +9,12 @@
                 <caption>글수정</caption>
                 <tr>
                     <th>제목</th>
-                    <td><input type="text" name="title" value="${article.title}"/></td>
+                    <td><input type="text" name="title" value="${title}"/></td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td>
-                        <textarea name="content">${article.content}</textarea>
+                        <textarea name="content">${content}</textarea>
                     </td>
                 </tr>
                 <tr>
