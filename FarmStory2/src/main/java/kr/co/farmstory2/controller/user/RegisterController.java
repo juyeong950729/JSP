@@ -32,7 +32,7 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		String uid 	 = req.getParameter("uid");
-		String pass  = req.getParameter("pass");
+		String pass  = req.getParameter("pass1");
 		String name  = req.getParameter("name");
 		String nick  = req.getParameter("nick");
 		String email = req.getParameter("email");
@@ -46,7 +46,7 @@ public class RegisterController extends HttpServlet {
 		vo.setUid(uid);
 		vo.setPass(pass);
 		vo.setName(name);
-		vo.setName(nick);
+		vo.setNick(nick);
 		vo.setEmail(email);
 		vo.setHp(hp);
 		vo.setZip(zip);
