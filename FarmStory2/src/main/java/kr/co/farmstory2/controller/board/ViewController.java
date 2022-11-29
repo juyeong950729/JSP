@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	public void init() throws ServletException {
 	}
@@ -27,5 +27,4 @@ public class ViewController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
-
 }

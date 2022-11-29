@@ -49,7 +49,7 @@
 			
 			setTimeout(function(){
 				$.ajax({
-					url: './proc/checkUid.jsp',
+					url: '/FarmStory2/user/uidCheck.do',
 					method: 'get',
 					data: jsonData,
 					dataType: 'json',
@@ -133,7 +133,7 @@
 			
 			setTimeout(function(){
 				$.ajax({
-					url: './proc/checkNick.jsp',
+					url: '/FarmStory2/user/nickCheck.do',
 					method: 'get',
 					data: jsonData,
 					dataType: 'json',

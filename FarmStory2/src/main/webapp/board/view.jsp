@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../_header.jsp"/>
+<jsp:include page="/_header.jsp"/>
 <main id="board">
     <section class="view">
         <table border="0">
@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <th>파일</th>
-                <td><a href="/FarmStory2/board/download.do">상반기 결산 자료</a>&nbsp;<span>7</span>회 다운로드</td>
+                <td><a href="/FarmStory2/board/download.do">상반기 결산자료</a>&nbsp;<span>7</span>회 다운로드</td>
             </tr>
             <tr>
                 <th>내용</th>
@@ -32,9 +32,9 @@
             <h3>댓글목록</h3>                   
 
             <article>
-                <span class="nick"></span>
-                <span class="date"></span>
-                <p class="content"></p>                        
+                <span class="nick">홍길동</span>
+                <span class="date">22-11-29</span>
+                <p class="content">테스트 댓글입니다.</p>                        
                 <div>
                     <a href="#" class="remove">삭제</a>
                     <a href="#" class="modify">수정</a>
@@ -42,6 +42,7 @@
             </article>
             
             <p class="empty">등록된 댓글이 없습니다.</p>
+
 
         </section>
 
@@ -58,4 +59,4 @@
         </section>
     </section>
 </main>
-<jsp:include page="../_footer.jsp"/>
+<jsp:include page="/_footer.jsp"/>

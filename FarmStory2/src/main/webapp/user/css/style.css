@@ -181,6 +181,7 @@
 }
 
 /* 아이디, 비밀번호 찾기 공통 */
+
 #user > .find {
     width: 600px;
     height: auto;            
@@ -233,3 +234,4 @@
     float: right;
     margin-top: 10px;
 }
+

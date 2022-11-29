@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../_header.jsp"/>
+<jsp:include page="/_header.jsp"/>
+<script src="/FarmStory2/js/validation.js"></script>
 <script>
 //비밀번호 검사하기
 
@@ -86,4 +87,4 @@ $(function(){
         </div>
     </section>
 </main>
-<jsp:include page="../_footer.jsp"/>
+<jsp:include page="/_footer.jsp"/>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../_header.jsp"/>
+<jsp:include page="/_header.jsp"/>
 <script>
 	$(function(){
 		$('.btnNext').click(function(){
@@ -23,7 +23,7 @@
             <caption>사이트 이용약관</caption>
             <tr>
                 <td>
-                    <textarea name="terms"></textarea>
+                    <textarea name="terms">${vo.terms}</textarea>
                     <label><input type="checkbox" class="terms" id=isCheck1>&nbsp;동의합니다.</label>
                 </td>
             </tr>
@@ -33,7 +33,7 @@
             <caption>개인정보 취급방침</caption>
             <tr>
                 <td>
-                    <textarea name="privacy"></textarea>
+                    <textarea name="privacy">${vo.privacy}</textarea>
                     <label><input type="checkbox" class="privacy" id=isCheck2>&nbsp;동의합니다.</label>
                 </td>
             </tr>
@@ -44,4 +44,4 @@
         </div>
     </section>
 </main>
-<jsp:include page="../_footer.jsp"/>
+<jsp:include page="/_footer.jsp"/>

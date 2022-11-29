@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../_header.jsp"/>
+<jsp:include page="/_header.jsp"/>
 <script src="/FarmStory2/js/validation.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/FarmStory2/js/zipcode.js"></script>
@@ -12,7 +12,7 @@
                     <td>아이디</td>
                     <td>
                         <input type="text" name="uid" placeholder="아이디 입력"/>
-                        <button type="button" id="btnIdCheck"><img src="../img/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnIdCheck"><img src="/FarmStory2/user/img/chk_id.gif" alt="중복확인"/></button>
                         <span class="uidResult"></span>
                     </td>
                 </tr>
@@ -39,7 +39,7 @@
                     <td>
                         <p class="nickInfo">공백없는 한글, 영문, 숫자 입력</p>
                         <input type="text" name="nick" placeholder="별명 입력"/>
-                        <button type="button" id="btnNickCheck"><img src="../img/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnNickCheck"><img src="/FarmStory2/user/img/chk_id.gif" alt="중복확인"/></button>
                         <span class="nickResult"></span>
                     </td>
                 </tr>
@@ -49,10 +49,10 @@
                         
                         <input type="email" name="email" placeholder="이메일 입력"/>
                         <span class="emailResult"></span>
-                        <button type="button" id="btnEmailAuth"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <button type="button" id="btnEmailAuth"><img src="/FarmStory2/user/img/chk_auth.gif" alt="인증번호 받기"/></button>
                         <div class="auth">
                             <input type="text" name="auth" placeholder="인증번호 입력"/>
-                            <button type="button" id="btnEmailConfirm"><img src="../img/chk_confirm.gif" alt="확인"/></button>
+                            <button type="button" id="btnEmailConfirm"><img src="/FarmStory2/user/img/chk_confirm.gif" alt="확인"/></button>
                         </div>
                     </td>
                 </tr>
@@ -64,7 +64,7 @@
                     <td>주소</td>
                     <td>
                         <input type="text" name="zip" id="zip" placeholder="우편번호" readonly="readonly"/>
-                        <button type="button" onclick="zipcode()"><img src="/FarmStory2/img/chk_post.gif" alt="우편번호찾기"/></button>
+                        <button type="button" onclick="zipcode()"><img src="/FarmStory2/user/img/chk_post.gif" alt="우편번호찾기"/></button>
                         <input type="text" name="addr1" id="addr1" placeholder="주소 검색"/>
                         <input type="text" name="addr2" id="addr2" placeholder="상세주소 입력"/>
                     </td>
@@ -79,4 +79,4 @@
 
     </section>
 </main>
-<jsp:include page="../_footer.jsp"/>
+<jsp:include page="/_footer.jsp"/>
