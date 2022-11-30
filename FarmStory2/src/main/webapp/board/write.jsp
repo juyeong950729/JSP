@@ -1,6 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
 <main id="board">
+	<c:choose>
+		<c:when test="${group.equals('community')}">
+			<jsp:include page="/board/_community.jsp"/>
+		</c:when>
+		<c:when test="${group.equals('croptalk')}">
+			<jsp:include page="/board/_croptalk.jsp"/>
+		</c:when>
+		<c:when test="${group.equals('event')}">
+			<jsp:include page="/board/_event.jsp"/>
+		</c:when>
+		<c:when test="${group.equals('market')}">
+			<jsp:include page="/board/_market.jsp"/>
+		</c:when>
+	</c:choose>
     <section class="write">
         <form action="/FarmStory2/board/write.do" method="post" enctype="multipart/form-data">
             <table border="0">
@@ -23,7 +38,7 @@
                 </tr>
             </table>
             <div>
-                <a href="/FarmStory2/board/list.do" class="btn btnCancel">취소</a>
+                <a href="/FarmStory2/board/list.do?group=${group}&cate=${cate}&pg=${pg}" class="btn btnCancel">취소</a>
                 <input type="submit" value="작성완료" class="btn btnComplete"/>
             </div>
         </form>

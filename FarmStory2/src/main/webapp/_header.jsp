@@ -48,9 +48,10 @@
             
             <ul class="gnb">
                 <li><a href="/FarmStory2/introduction/hello.do">팜스토리소개</a></li>
-                <li><a href="/FarmStory2/board/list.do"><img src="/FarmStory2/img/head_menu_badge.png" alt="30%"/>장보기</a></li>
-                <li><a href="/FarmStory2/board/list.do">농작물이야기</a></li>
-                <li><a href="/FarmStory2/board/list.do">이벤트</a></li>
-                <li><a href="/FarmStory2/board/list.do">커뮤니티</a></li>
+                <li><a href="/FarmStory2/board/list.do?group=${'market'}&cate=${'market'}"><img src="/FarmStory2/img/head_menu_badge.png" alt="30%"/>장보기</a></li>
+                <li><a href="/FarmStory2/board/list.do?group=${'croptalk'}&cate=${'story'}">농작물이야기</a></li>
+                
+                <li><a href="/FarmStory2/board/list.do?group=${'event'}&cate=${'event'}">이벤트</a></li>
+                <li><a href="/FarmStory2/board/list.do?group=${'community'}&cate=${'notice'}">커뮤니티</a></li>
             </ul>
         </header>

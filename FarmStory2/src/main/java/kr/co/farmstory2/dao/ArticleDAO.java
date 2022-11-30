@@ -28,11 +28,12 @@ public class ArticleDAO extends DBHelper {
 			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
 			stmt = conn.createStatement();
 			
-			psmt.setString(1, article.getTitle());
-			psmt.setString(2, article.getContent());
-			psmt.setInt(3, article.getFname() == null ? 0 : 1);
-			psmt.setString(4, article.getUid());
-			psmt.setString(5, article.getRegip());
+			psmt.setString(1, article.getCate());
+			psmt.setString(2, article.getTitle());
+			psmt.setString(3, article.getContent());
+			psmt.setInt(4, article.getFname() == null ? 0 : 1);
+			psmt.setString(5, article.getUid());
+			psmt.setString(6, article.getRegip());
 			psmt.executeUpdate();
 			rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
 			conn.commit();
@@ -97,14 +98,15 @@ public class ArticleDAO extends DBHelper {
 		}
 		return article;
 	}
-	public List<ArticleVO> selectArticles(int limitStart) {
+	public List<ArticleVO> selectArticles(String cate, int limitStart) {
 		
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
 			logger.info("selectArticles...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES);
-			psmt.setInt(1, limitStart);
+			psmt.setString(1, cate);
+			psmt.setInt(2, limitStart);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -223,22 +225,15 @@ public class ArticleDAO extends DBHelper {
 		}
 		return comments;
 	}
-	public int selectCountTotal(String keyword) {
+	public int selectCountTotal(String cate) {
 		
 		int total = 0;
 		try {
 			logger.info("selectCountTotal...");
 			conn = getConnection();
-			
-			if(keyword == null) {
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
-			}else {
-				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_FOR_SEARCH);
-				psmt.setString(1, "%"+keyword+"%");
-				psmt.setString(2, "%"+keyword+"%");
-				rs = psmt.executeQuery();
-			}
+			psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
 				total = rs.getInt(1);

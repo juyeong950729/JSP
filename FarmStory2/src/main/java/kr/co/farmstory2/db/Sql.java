@@ -34,7 +34,8 @@ public class Sql {
 	
 	
 	// board
-	public static final String INSERT_ARTICLE = "INSERT INTO `board_article` SET"
+	public static final String INSERT_ARTICLE = "INSERT INTO `board_article` SET "
+												+ "`cate`=?, "
 												+ "`title`=?,"
 												+ "`content`=?,"
 												+ "`file`=?,"
@@ -56,7 +57,7 @@ public class Sql {
 	
 	public static final String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `board_article`";
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `board_article` "
-												 + "WHERE `parent` = 0";
+												 + "WHERE `parent` = 0 AND `cate`=?";
 	public static final String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(`no`) FROM `board_article` AS a "
 																+ "JOIN `board_user` AS b ON a.uid=b.uid "
 																+ "WHERE `parent`=0 "
@@ -64,7 +65,7 @@ public class Sql {
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.nick FROM `board_article` AS a "
 												+ "JOIN `board_user` AS b "
 												+ "ON a.uid = b.uid "
-												+ "WHERE `parent` = 0 "
+												+ "WHERE `parent` = 0 AND `cate`=? "
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	

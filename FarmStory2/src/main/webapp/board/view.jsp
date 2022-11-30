@@ -2,6 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
 <main id="board">
+	<c:choose>
+		<c:when test="${group.equals('community')}">
+			<jsp:include page="/board/_community.jsp"/>
+		</c:when>
+		<c:when test="${group.equals('croptalk')}">
+			<jsp:include page="/board/_croptalk.jsp"/>
+		</c:when>
+		<c:when test="${group.equals('event')}">
+			<jsp:include page="/board/_event.jsp"/>
+		</c:when>
+		<c:when test="${group.equals('market')}">
+			<jsp:include page="/board/_market.jsp"/>
+		</c:when>
+	</c:choose>
     <section class="view">
         <table border="0">
             <caption>글보기</caption>
