@@ -8,7 +8,7 @@
             <img src="/FarmStory2/img/sub_aside_cate2_tit.png" alt="장보기">
             <ul class="lnb">
                 <li class="on">
-                    <a href="/FarmStory2/market/market.jsp">장보기</a>
+                    <a href="/FarmStory2/board/list.do?group=market&cate=market&pg=1">장보기</a>
                 </li>
             </ul>
         </aside>

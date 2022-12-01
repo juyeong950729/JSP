@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 
@@ -32,23 +33,27 @@ public class WriteController extends HttpServlet {
 		String cate  = req.getParameter("cate");
 		String pg 	 = req.getParameter("pg");
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/write.jsp?group="+group+"&cate="+cate);
+		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
+		req.setAttribute("pg", pg);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/write.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		String group = req.getParameter("group");
-		String cate  = req.getParameter("cate");
-		String pg 	 = req.getParameter("pg");
+		HttpSession session = req.getSession();
+		String sessUser = (String) session.getAttribute("SESSID");
 		
 		// 파일 업로드
 		ServletContext ctx = req.getServletContext();	
 		String path = ctx.getRealPath("/file");
-		
 		MultipartRequest mr = service.uploadFile(req, path);
 		
+		String group	= mr.getParameter("group");
+		String cate		= mr.getParameter("cate");
 		String title 	= mr.getParameter("title");
 		String content  = mr.getParameter("content");
 		String uid		= mr.getParameter("uid");
@@ -56,6 +61,7 @@ public class WriteController extends HttpServlet {
 		String regip    = req.getRemoteAddr();
 		
 		ArticleVO article = new ArticleVO();
+		article.setCate(cate);
 		article.setTitle(title);
 		article.setContent(content);
 		article.setUid(uid);
@@ -78,9 +84,8 @@ public class WriteController extends HttpServlet {
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
-		req.setAttribute("pg", pg);
 		
-		resp.sendRedirect("/FarmStory2/board/list.do?group="+group+"&cate="+cate+"&pg="+pg);
+		resp.sendRedirect("/FarmStory2/board/list.do?group="+group+"&cate="+cate+"&pg=1");
 	
 	
 	}

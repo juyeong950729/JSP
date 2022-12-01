@@ -9,13 +9,13 @@
             <img src="/FarmStory2/img/sub_aside_cate3_tit.png" alt="팜스토리 소개">
             <ul class="lnb">
                 <li class="${cate.equals('story') ? 'on' : 'off'}">
-                    <a href="/FarmStory2/board/list.do?group=croptalk&cate=story">농작물이야기</a>
+                    <a href="/FarmStory2/board/list.do?group=croptalk&cate=story&pg=1">농작물이야기</a>
                 </li>
                 <li class="${cate.equals('grow') ? 'on' : 'off'}">
-                    <a href="/FarmStory2/board/list.do?group=croptalk&cate=grow">텃밭가꾸기</a>
+                    <a href="/FarmStory2/board/list.do?group=croptalk&cate=grow&pg=1">텃밭가꾸기</a>
                 </li>
                 <li class="${cate.equals('school') ? 'on' : 'off'}">
-                    <a href="/FarmStory2/board/list.do?group=croptalk&cate=school">귀농학교</a>
+                    <a href="/FarmStory2/board/list.do?group=croptalk&cate=school&pg=1">귀농학교</a>
                 </li>
             </ul>
         </aside>

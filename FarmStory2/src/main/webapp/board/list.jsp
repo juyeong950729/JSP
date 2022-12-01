@@ -33,7 +33,7 @@
 	            <c:forEach var="article" items="${articles}">         
 	            <tr>
 	                <td>${PageStartNum = PageStartNum - 1}</td>
-	                <td><a href="/FarmStory2/board/view.do?cate=${cate}&no=${article.no}&pg=${currentPage}">${article.title} [${article.comment}]</a></td>
+	                <td><a href="/FarmStory2/board/view.do?group=${group}&cate=${cate}&no=${article.no}&pg=${currentPage}">${article.title} [${article.comment}]</a></td>
 	                <td>${article.nick}</td>
 	                <td>${article.rdate.substring(2, 10)}</td>
 	                <td>${article.hit}</td>
@@ -52,7 +52,7 @@
 	            	<a href="/FarmStory2/board/list.do?group=${group}&cate=${cate}&pg=${PageGroupEnd + 1}" class="next">다음</a>
 	            </c:if>
 	        </div>
-	        <a href="./write.do?group=${group}&cate=${cate}" class="btn btnWrite">글쓰기</a>
+	        <a href="./write.do?group=${group}&cate=${cate}&pg=${pg}" class="btn btnWrite">글쓰기</a>
 	    </section>
 	  </article>
   </section>

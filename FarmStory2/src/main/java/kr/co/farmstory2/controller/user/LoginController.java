@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
 			
 			resp.sendRedirect("/FarmStory2/index.do");
 		} else {
-			resp.sendRedirect("/FarmStory2/user/login.do?success=100");
+			resp.sendRedirect("/FarmStory2/index.do");
 		}
 		
 	}

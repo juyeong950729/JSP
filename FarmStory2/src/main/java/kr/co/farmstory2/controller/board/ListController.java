@@ -44,7 +44,7 @@ public class ListController extends HttpServlet {
 		// 현재 페이지 게시물 limit 시작값 계산
 		if (pg != null) {
 			currentPage = Integer.parseInt(pg);
-		}
+		} 
 		start = (currentPage - 1) * 10;
 		
 		// 페이지 그룹 계산

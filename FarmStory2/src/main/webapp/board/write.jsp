@@ -1,23 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
+<c:choose>
+	<c:when test="${group.equals('community')}">
+		<jsp:include page="/board/_community.jsp"/>
+	</c:when>
+	<c:when test="${group.equals('croptalk')}">
+		<jsp:include page="/board/_croptalk.jsp"/>
+	</c:when>
+	<c:when test="${group.equals('event')}">
+		<jsp:include page="/board/_event.jsp"/>
+	</c:when>
+	<c:when test="${group.equals('market')}">
+		<jsp:include page="/board/_market.jsp"/>
+	</c:when>
+</c:choose>
 <main id="board">
-	<c:choose>
-		<c:when test="${group.equals('community')}">
-			<jsp:include page="/board/_community.jsp"/>
-		</c:when>
-		<c:when test="${group.equals('croptalk')}">
-			<jsp:include page="/board/_croptalk.jsp"/>
-		</c:when>
-		<c:when test="${group.equals('event')}">
-			<jsp:include page="/board/_event.jsp"/>
-		</c:when>
-		<c:when test="${group.equals('market')}">
-			<jsp:include page="/board/_market.jsp"/>
-		</c:when>
-	</c:choose>
-    <section class="write">
+	<section class="write">
         <form action="/FarmStory2/board/write.do" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="uid" value="${sessUser.uid}" method="post">
+            <input type="hidden" name="group" value="${group}" method="post">
+            <input type="hidden" name="cate" value="${cate}" method="post">
             <table border="0">
                 <caption>글쓰기</caption>
                 <tr>
@@ -44,4 +47,7 @@
         </form>
     </section>
 </main>
+		</article>
+	</section>
+</div>
 <jsp:include page="/_footer.jsp"/>
