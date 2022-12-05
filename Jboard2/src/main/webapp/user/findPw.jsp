@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
-<script src="/Jboard2/js/emailCheck.js"></script>
 <script>
 	$(function(){
 		$('.btnNext').click(function(e){

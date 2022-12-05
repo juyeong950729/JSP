@@ -1,6 +1,7 @@
 package kr.co.jboard2.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import javax.xml.crypto.dsig.spec.ExcC14NParameterSpec;
 
@@ -206,7 +207,19 @@ public class UserDAO extends DBHelper {
 		return vo;
 	}
 	public void selectUsers() {}
-	public void updateUser() {}
+	public int updateUser(UserVO vo) {
+		int result = 0;
+		try {
+			logger.info("updateUser...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER);
+			result = psmt.executeUpdate();
+			close();
+		} catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	public int updateUserPassword(String uid, String pass) {
 		int result = 0;
 		try {
@@ -260,6 +273,24 @@ public class UserDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 	}
+
+	public int updateUserForDrop(String uid) {
+		
+		int result = 0;
+		
+		try {
+			logger.info("updateUserForDrop...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER_FOR_DROP);
+			psmt.setString(1, uid);
+			result = psmt.executeUpdate();
+			close();
+		} catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+
 	public void deleteUser() {}
 	
 }
