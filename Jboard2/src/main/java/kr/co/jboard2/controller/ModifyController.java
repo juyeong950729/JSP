@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.jboard2.service.ArticleService;
+import kr.co.jboard2.vo.ArticleVO;
 
 @WebServlet("/modify.do")
 public class ModifyController extends HttpServlet {
@@ -26,10 +27,14 @@ public class ModifyController extends HttpServlet {
 	
 		String no 	   = req.getParameter("no");
 		String pg 	   = req.getParameter("pg");
-		String title   = req.getParameter("title");
-		String content = req.getParameter("content");
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/modify.jsp?no="+no+"&pg="+pg);
+		ArticleVO article = service.selectArticle(no);
+		
+		req.setAttribute("no", no);
+		req.setAttribute("pg", pg);
+		req.setAttribute("article", article);
+
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/modify.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -42,7 +47,14 @@ public class ModifyController extends HttpServlet {
 		String content = req.getParameter("content");
 		
 		service.updateArticle(no, title, content);
-		resp.sendRedirect("/Jboard2/view.do?no="+no+"&pg"+pg+"&title"+title+"&content"+content);
+		
+		ArticleVO article = service.selectArticle(no);
+		
+		req.setAttribute("no", no);
+		req.setAttribute("pg", pg);
+		req.setAttribute("article", article);
+		
+		resp.sendRedirect("/Jboard2/view.do?no="+no+"&pg="+pg);
 
 	} 
 

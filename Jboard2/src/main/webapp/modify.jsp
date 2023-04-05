@@ -2,19 +2,19 @@
 <jsp:include page="./_header.jsp"/>
 <main id="board">
     <section class="modify">
-        <form action="#">
+        <form action="/Jboard2/modify.do" method="post">
         	<input type="hidden" name="no" value="${no}" method="post">
         	<input type="hidden" name="pg" value="${pg}" method="post">
             <table border="0">
                 <caption>글수정</caption>
                 <tr>
                     <th>제목</th>
-                    <td><input type="text" name="title" value="${article.getTitle()}"/></td>
+                    <td><input type="text" name="title" value="${article.title}"/></td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td>
-                        <textarea name="content">${article.getContent()}</textarea>
+                        <textarea name="content">${article.content}</textarea>
                     </td>
                 </tr>
                 <tr>
